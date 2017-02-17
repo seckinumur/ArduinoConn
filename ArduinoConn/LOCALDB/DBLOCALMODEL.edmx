@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=&quot;C:\Program Files (x86)\ArduinoConn\Data\DB.db&quot;" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State" Type="integer" />
+        </EntityType>
+        <EntityType Name="ArtificialIntelligence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AverageTemperature" Type="real" />
+          <Property Name="Lights" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="NightStart" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="DayStart" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Year" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Week" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Day" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Damp" Type="real" />
+        </EntityType>
+        <EntityType Name="MainLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Temperature" Type="real" />
+          <Property Name="Light" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Time" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Month" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Days" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Years" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Damp" Type="real" />
+        </EntityType>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="Active" EntityType="Self.Active" store:Type="Tables" />
+          <EntitySet Name="ArtificialIntelligence" EntityType="Self.ArtificialIntelligence" store:Type="Tables" />
+          <EntitySet Name="MainLog" EntityType="Self.MainLog" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ArtificialIntelligence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AverageTemperature" Type="Double" />
+          <Property Name="Lights" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="NightStart" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="DayStart" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Year" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Week" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Day" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Damp" Type="Double" />
+        </EntityType>
+        <EntityType Name="MainLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Temperature" Type="Double" />
+          <Property Name="Light" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Month" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Days" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Years" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Damp" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArtificialIntelligence" EntityType="Self.ArtificialIntelligence" />
+          <EntitySet Name="MainLog" EntityType="Self.MainLog" />
+          <EntitySet Name="Active" EntityType="DBModel.Active" />
+        </EntityContainer>
+        <EntityType Name="Active">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State" Type="Int64" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="ArtificialIntelligence">
+            <EntityTypeMapping TypeName="DBModel.ArtificialIntelligence">
+              <MappingFragment StoreEntitySet="ArtificialIntelligence">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AverageTemperature" ColumnName="AverageTemperature" />
+                <ScalarProperty Name="Lights" ColumnName="Lights" />
+                <ScalarProperty Name="NightStart" ColumnName="NightStart" />
+                <ScalarProperty Name="DayStart" ColumnName="DayStart" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Week" ColumnName="Week" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Damp" ColumnName="Damp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainLog">
+            <EntityTypeMapping TypeName="DBModel.MainLog">
+              <MappingFragment StoreEntitySet="MainLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="Light" ColumnName="Light" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="Years" ColumnName="Years" />
+                <ScalarProperty Name="Damp" ColumnName="Damp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Active">
+            <EntityTypeMapping TypeName="DBModel.Active">
+              <MappingFragment StoreEntitySet="Active">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
