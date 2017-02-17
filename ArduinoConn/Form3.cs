@@ -31,6 +31,7 @@ namespace ArduinoConn
                 db.SaveChanges();
                 MessageBox.Show("LOCAL DATABASE ACTIVE");
                 eris.CONTROL = true;
+                button1.Visible = false;
             }
         }
     }
