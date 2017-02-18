@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\secki\onedrive\belgeler\visual studio 2015\Projects\ArduinoConn\ArduinoConn\LOCALDB\DBLOCALMODEL.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\secki\onedrive\belgeler\visual studio 2015\Projects\ArduinoConn\ArduinoConn\LOCALDB\LOCALDBMODEL.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -48,6 +48,7 @@
             this.aLLKILLESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cORECODEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pLANToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dATABASESETTINGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.button3 = new System.Windows.Forms.Button();
@@ -56,7 +57,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dATABASESETTINGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -248,16 +249,23 @@
             // cORECODEToolStripMenuItem
             // 
             this.cORECODEToolStripMenuItem.Name = "cORECODEToolStripMenuItem";
-            this.cORECODEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cORECODEToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.cORECODEToolStripMenuItem.Text = "CORE CODE";
             this.cORECODEToolStripMenuItem.Click += new System.EventHandler(this.cORECODEToolStripMenuItem_Click);
             // 
             // pLANToolStripMenuItem
             // 
             this.pLANToolStripMenuItem.Name = "pLANToolStripMenuItem";
-            this.pLANToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pLANToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.pLANToolStripMenuItem.Text = "PLAN";
             this.pLANToolStripMenuItem.Click += new System.EventHandler(this.pLANToolStripMenuItem_Click);
+            // 
+            // dATABASESETTINGToolStripMenuItem
+            // 
+            this.dATABASESETTINGToolStripMenuItem.Name = "dATABASESETTINGToolStripMenuItem";
+            this.dATABASESETTINGToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.dATABASESETTINGToolStripMenuItem.Text = "DATABASE SETTING";
+            this.dATABASESETTINGToolStripMenuItem.Click += new System.EventHandler(this.dATABASESETTINGToolStripMenuItem_Click);
             // 
             // toolStripStatusLabel1
             // 
@@ -337,12 +345,9 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // dATABASESETTINGToolStripMenuItem
+            // serialPort2
             // 
-            this.dATABASESETTINGToolStripMenuItem.Name = "dATABASESETTINGToolStripMenuItem";
-            this.dATABASESETTINGToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.dATABASESETTINGToolStripMenuItem.Text = "DATABASE SETTING";
-            this.dATABASESETTINGToolStripMenuItem.Click += new System.EventHandler(this.dATABASESETTINGToolStripMenuItem_Click);
+            this.serialPort2.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort2_DataReceived);
             // 
             // Form1
             // 
@@ -404,6 +409,7 @@
         private System.Windows.Forms.ToolStripMenuItem cORECODEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pLANToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dATABASESETTINGToolStripMenuItem;
+        private System.IO.Ports.SerialPort serialPort2;
     }
 }
 

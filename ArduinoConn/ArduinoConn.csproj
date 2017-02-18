@@ -94,31 +94,41 @@
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
     <Compile Include="LOCALDB\Active.cs">
-      <DependentUpon>DBLOCALMODEL.tt</DependentUpon>
+      <DependentUpon>LOCALDBMODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="LOCALDB\ArtificialIntelligence.cs">
-      <DependentUpon>DBLOCALMODEL.tt</DependentUpon>
+      <DependentUpon>LOCALDBMODEL.tt</DependentUpon>
     </Compile>
-    <Compile Include="LOCALDB\DBLOCALMODEL.Context.cs">
+    <Compile Include="LOCALDB\LOCALDBMODEL.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBLOCALMODEL.Context.tt</DependentUpon>
+      <DependentUpon>LOCALDBMODEL.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="LOCALDB\DBLOCALMODEL.cs">
+    <Compile Include="LOCALDB\LOCALDBMODEL.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBLOCALMODEL.tt</DependentUpon>
+      <DependentUpon>LOCALDBMODEL.tt</DependentUpon>
     </Compile>
-    <Compile Include="LOCALDB\DBLOCALMODEL.Designer.cs">
+    <Compile Include="LOCALDB\LOCALDBMODEL.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBLOCALMODEL.edmx</DependentUpon>
+      <DependentUpon>LOCALDBMODEL.edmx</DependentUpon>
     </Compile>
     <Compile Include="LOCALDB\MainLog.cs">
-      <DependentUpon>DBLOCALMODEL.tt</DependentUpon>
+      <DependentUpon>LOCALDBMODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="LOCALDB\LOCALDBMODEL.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LOCALDBMODEL.edmx</DependentUpon>
+      <LastGenOutput>LOCALDBMODEL.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="LOCALDB\LOCALDBMODEL.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LOCALDBMODEL.edmx</DependentUpon>
+      <LastGenOutput>LOCALDBMODEL.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,15 +148,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EntityDeploy Include="LOCALDB\DBLOCALMODEL.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBLOCALMODEL.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <Content Include="Data\DB.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="LOCALDB\DBLOCALMODEL.edmx.diagram">
-      <DependentUpon>DBLOCALMODEL.edmx</DependentUpon>
+    <EntityDeploy Include="LOCALDB\LOCALDBMODEL.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LOCALDBMODEL.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="LOCALDB\LOCALDBMODEL.edmx.diagram">
+      <DependentUpon>LOCALDBMODEL.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -173,16 +183,6 @@
     </Content>
     <Content Include="img\server.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LOCALDB\DBLOCALMODEL.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBLOCALMODEL.edmx</DependentUpon>
-      <LastGenOutput>DBLOCALMODEL.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="LOCALDB\DBLOCALMODEL.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBLOCALMODEL.edmx</DependentUpon>
-      <LastGenOutput>DBLOCALMODEL.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

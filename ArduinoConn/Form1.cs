@@ -17,11 +17,14 @@ namespace ArduinoConn
     public partial class Form1 : Form
     {
         public bool CONTROL;
+        public string value;
+        public string value1;
         public Form1()
-        { 
+        {
             InitializeComponent();
             comboBox3.SelectedItem = "9600";
             serialPort1.BaudRate = int.Parse(comboBox3.SelectedItem.ToString());
+            serialPort2.BaudRate = int.Parse(comboBox3.SelectedItem.ToString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,6 +34,7 @@ namespace ArduinoConn
             {
                 comboBox1.DataSource = SerialPort.GetPortNames();
                 serialPort1.PortName = comboBox1.SelectedItem.ToString();
+                serialPort2.PortName = comboBox1.SelectedItem.ToString();
                 comboBox2.SelectedItem = "PASSIVE";
             }
             catch
@@ -39,19 +43,20 @@ namespace ArduinoConn
             }
             try
             {
-                using (DBEntities db = new DBEntities())
+                using (DBEntities2 db = new DBEntities2())
                 {
                     var bul = db.Active.Where(p => p.State == 1).FirstOrDefault();
-                    if(bul.State==1)
+                    if (bul.State == 1)
                     {
                         CONTROL = true;
                     }
                 }
-            }catch
+            }
+            catch
             {
                 CONTROL = false;
             }
-            
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -70,11 +75,13 @@ namespace ArduinoConn
                 await Task.Delay(60);
                 button1.BackColor = Color.DarkRed;
                 toolStripStatusLabel2.Text = "TEMPERATURE";
-            }catch
+            }
+            catch
             {
                 MessageBox.Show("ERR. Serial Port NOT FOUND");
+                toolStripStatusLabel2.Text = "ERR. Serial Port NOT FOUND";
             }
-            
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,13 +91,9 @@ namespace ArduinoConn
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            string a = serialPort1.ReadExisting();
-            string value = "";
-            for (int i = 0; i < 5; i++)
-            {
-                value += a[i];
-            }
-            listBox1.Items.Add(value);
+            string a = serialPort1.ReadLine();
+            value = a;
+            listBox1.Items.Add(a);
             listBox1.SelectedIndex = listBox1.Items.Count - 1;
             serialPort1.Close();
         }
@@ -109,16 +112,15 @@ namespace ArduinoConn
             timer1.Stop();
             numericUpDown1.Value = 5000;
             listBox1.Items.Clear();
-            toolStripStatusLabel2.Text = "--";
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
             try
             {
-                serialPort1.Close();
-                serialPort1.Open();
-                serialPort1.Write("0");
+                serialPort2.Close();
+                serialPort2.Open();
+                serialPort2.Write("0");
                 button2.BackColor = Color.White;
                 await Task.Delay(60);
                 button2.BackColor = Color.Gold;
@@ -127,17 +129,35 @@ namespace ArduinoConn
             catch
             {
                 MessageBox.Show("ERR. Serial Port NOT FOUND");
+                toolStripStatusLabel2.Text = "ERR. Serial Port NOT FOUND";
             }
-            
+
         }
 
-        private  void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBox2.SelectedItem.ToString()== "ACTIVE")
+            if (comboBox2.SelectedItem.ToString() == "ACTIVE")
             {
-                timer1.Interval =Convert.ToInt32(numericUpDown1.Value);
-                timer1.Start();
-                toolStripStatusLabel1.Text = "| Timer : "+numericUpDown1.Value.ToString() +" |";
+                if (CONTROL == true)
+                {
+                    DialogResult Uyari = new DialogResult();
+                    Uyari = MessageBox.Show("Artificial intelligence activated?", "Attention!", MessageBoxButtons.YesNo);
+                    if (Uyari == DialogResult.Yes)
+                    {
+                        timer1.Interval = Convert.ToInt32(numericUpDown1.Value);
+                        timer1.Start();
+                        toolStripStatusLabel1.Text = "| Timer : " + numericUpDown1.Value.ToString() + " |";
+                    }
+                }
+                else
+                {
+                    Form3 ac = new Form3();
+                    ac.Show();
+                    ac.button1.Visible = true;
+                    ac.label2.Visible = false;
+                    ac.pictureBox1.Visible = false;
+                    MessageBox.Show("LOCAL DATABASE NOT ACTIVE!");
+                }
             }
             else
             {
@@ -145,31 +165,42 @@ namespace ArduinoConn
                 toolStripStatusLabel1.Text = "| Timer : OFF |";
             }
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
+            serialPort1.Open();
+            serialPort1.Write("1");
+            await Task.Delay(100);
+            serialPort2.Open();
+            serialPort2.Write("0");
+            await Task.Delay(100);
             try
             {
-                if (toolStripStatusLabel2.Text == "TEMPERATURE")
+                using (DBEntities2 db = new DBEntities2())
                 {
-                    serialPort1.Open();
-                    serialPort1.Write("1");
-                }
-                else
-                {
-                    serialPort1.Open();
-                    serialPort1.Write("0");
+                    MainLog Record = new MainLog();
+                    Record.Days = DateTime.Now.Day.ToString();
+                    Record.Month = DateTime.Now.Month.ToString();
+                    Record.Time = DateTime.Now.ToShortTimeString();
+                    Record.Years = DateTime.Now.Year.ToString();
+                    Record.Light = value1;
+                    Record.Temperature = value;
+                    Record.Damp = "NO DATA";
+                    db.MainLog.Add(Record);
+                    db.SaveChanges();
+                    value1 = "";
+                    value = "";
                 }
             }
             catch
             {
                 MessageBox.Show("ERR. Serial Port NOT FOUND");
+                toolStripStatusLabel2.Text = "ERR. Serial Port NOT FOUND";
             }
-           
+
         }
 
         private void pLANToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void cORECODEToolStripMenuItem_Click(object sender, EventArgs e)
@@ -186,7 +217,7 @@ namespace ArduinoConn
                 ac.Show();
                 ac.button1.Visible = false;
                 ac.label2.Visible = true;
-                ac.pictureBox1.Visible = true; 
+                ac.pictureBox1.Visible = true;
             }
             else
             {
@@ -195,6 +226,15 @@ namespace ArduinoConn
                 ac.label2.Visible = false;
                 ac.pictureBox1.Visible = false;
             }
+        }
+
+        private void serialPort2_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string a = serialPort2.ReadLine();
+            value1 = a;
+            listBox1.Items.Add(a);
+            listBox1.SelectedIndex = listBox1.Items.Count - 1;
+            serialPort2.Close();
         }
     }
 }

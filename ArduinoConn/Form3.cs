@@ -23,7 +23,7 @@ namespace ArduinoConn
         {
             label2.Visible = true;
             pictureBox1.Visible = true;
-            using (DBEntities db = new DBEntities())
+            using (DBEntities2 db = new DBEntities2())
             {
                 Active ekle = new Active();
                 ekle.State =1;

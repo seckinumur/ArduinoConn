@@ -13,10 +13,10 @@ namespace ArduinoConn.LOCALDB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBEntities : DbContext
+    public partial class DBEntities2 : DbContext
     {
-        public DBEntities()
-            : base("name=DBEntities")
+        public DBEntities2()
+            : base("name=DBEntities2")
         {
         }
     
@@ -25,8 +25,8 @@ namespace ArduinoConn.LOCALDB
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Active> Active { get; set; }
         public virtual DbSet<ArtificialIntelligence> ArtificialIntelligence { get; set; }
         public virtual DbSet<MainLog> MainLog { get; set; }
-        public virtual DbSet<Active> Active { get; set; }
     }
 }

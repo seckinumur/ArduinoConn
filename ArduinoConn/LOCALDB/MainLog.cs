@@ -15,12 +15,12 @@ namespace ArduinoConn.LOCALDB
     public partial class MainLog
     {
         public long ID { get; set; }
-        public Nullable<double> Temperature { get; set; }
+        public string Temperature { get; set; }
         public string Light { get; set; }
-        public Nullable<decimal> Time { get; set; }
-        public Nullable<decimal> Month { get; set; }
-        public Nullable<decimal> Days { get; set; }
-        public Nullable<decimal> Years { get; set; }
-        public Nullable<double> Damp { get; set; }
+        public string Time { get; set; }
+        public string Month { get; set; }
+        public string Days { get; set; }
+        public string Years { get; set; }
+        public string Damp { get; set; }
     }
 }
